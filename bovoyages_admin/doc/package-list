@@ -1,0 +1,5 @@
+fr.gtm.bovoyages.dao
+fr.gtm.bovoyages.entities
+fr.gtm.bovoyages.facades
+fr.gtm.bovoyages.repos
+fr.gtm.bovoyages.servlet
