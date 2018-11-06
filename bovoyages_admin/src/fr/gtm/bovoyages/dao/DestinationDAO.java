@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import fr.gtm.bovoyages.entities.Destination;
 
 /**
- * Contient les m�thodes des requ�tes de donn�es; 
+ * Contient les methodes des requetes de donnees; 
  * Instancie la DataSource
  * Utilise 'getConnection'
  */
@@ -26,11 +26,36 @@ public class DestinationDAO {
 
 	}
 	
-	
+	/*******************************************************************************
+     * Methode permettant de rechercher toutes les destinations visibles et cachees
+     * @return Retourne la liste de destinations visibles et cachees
+     *******************************************************************************/
 	public List<Destination> getAllDestinations() {
 		List<Destination> destinations = em.createNamedQuery("allDestinations",Destination.class).getResultList();
 		return destinations;
 	}
+	
+	//-----------------------------------------------------------------------------------------------------------------
+	//-------------------------------les modifs du 05/11/18 ------------------------------------------------------------
+	/*******************************************************************************
+     *  Methode permettant de rechercher toutes les destinations visibles
+     * @return Retourne la liste de destinations visibles
+     *******************************************************************************/
+	public List<Destination>allDestinationsVisible(){
+		List<Destination> destinations = em.createNamedQuery("allDestinationsVisible",Destination.class).getResultList();
+		return destinations;		
+	}
+	
+	/*******************************************************************************
+     *  Methode permettant de rechercher toutes les destinations cachés
+     * @return Retourne la liste de destinations cachée
+     *******************************************************************************/
+	public List<Destination>allDestinationsHidden(){
+		List<Destination> destinations = em.createNamedQuery("allDestinationsHidden",Destination.class).getResultList();
+		return destinations;
+	}
+	//----------------------------- Fin Modif ---------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------
 	
 	public Destination getDestinationById(int id) {
 		return em.find(Destination.class, id);

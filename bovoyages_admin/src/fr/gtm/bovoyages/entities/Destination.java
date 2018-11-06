@@ -29,8 +29,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name="destinations")
 @NamedQueries({
-	@NamedQuery(name="allDestinations",query="select d from Destination d") //,
+	//****************** Requete pour récupérer toutes les destinations ********************************
+	@NamedQuery(name="allDestinations",query="select d from Destination d"),
 	//@NamedQuery(name="allDestinations",query="select d from Destination d where d.region =:region"),
+	
+	//--------------------------------------------------------------------------------------------------
+	//-------------------------- les modifs du 06/11/18---------------------------------------------------
+	//****************** Requete pour recuperer que les destinations visibles **************************
+	@NamedQuery(name="allDestinationsVisible",query="SELECT d FROM Destination d WHERE d.hidden = 1"),
+	
+	//****************** Requete pour recuperer les destinations non visibles **************************
+	@NamedQuery(name="allDestinationsHidden",query = " SELECT d FROM Destination d WHERE d.hidden = 0")
+	
+	
+	//-------------------------- Fin Modif ----------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------
 })
 
 
@@ -45,16 +58,30 @@ public class Destination implements Serializable{
 	private int  id;
 	private String region;
 	private String description;
+	//-------------------------------------------------------------------------------------------------
+	//-------------------------- les modifs du 06/11/18 -----------------------------------------------
+	//***** hidden indique si la destination est cachée(0) ou non (1)
+	private int hidden;
+	//***** nb_max indique le nombre de place pour la destination
+	private int nb_max;
+	//---------------------------- Fin Modif ----------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------
 	
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name = "images", joinColumns= {@JoinColumn(name="fk_destination")})
 	@Column(name="image")
 	private List<String> images = new ArrayList<String>();
 	
-	
-	@OneToMany(cascade=CascadeType.ALL)
+	//-------------------------------------------------------------------------------------------------
+	//---------------------------- les modifs du 06/11/18 ---------------------------------------------
+	//******* Jointure de table ***********************************************************************
+	//***** ajout de 	fetch = FetchType.LAZY à la jointure*******************************************
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	//----------------------------- Fin Modif ---------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------
 	@JoinColumn(name="fk_destination")
 	private List<DatesVoyage> datesVoyages = new ArrayList<>();
+	
 	public Destination() {}
 	
 	public Destination(String region, String description) {
@@ -95,15 +122,32 @@ public class Destination implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-
-	@Override
-	public String toString() {
-		return "Destination [id=" + id + ", region=" + region + ", description=" + description + ", images=" + images
-				+ ", datesVoyages=" + datesVoyages + "]";
+	//-------------------------------------------------------------------------------------------------
+	//---------------------------- les modifs du 06/11/18 ---------------------------------------------
+	public int getHidden() {
+		return hidden;
 	}
 
+	public void setHidden(int hidden) {
+		this.hidden = hidden;
+	}
+
+	public int getNb_max() {
+		return nb_max;
+	}
+
+	public void setNb_max(int nb_max) {
+		this.nb_max = nb_max;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Destination [id=" + id + ", region=" + region + ", description=" + description + ", hidden=" + hidden
+				+ ", nb_max=" + nb_max + ", images=" + images + ", datesVoyages=" + datesVoyages + "]";
+	}
+	//----------------------------- Fin Modif ---------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------
 	public List<DatesVoyage> getDatesVoyages() {
 		return datesVoyages;
 	}
@@ -120,7 +164,5 @@ public class Destination implements Serializable{
 		this.datesVoyages = datesVoyages;
 	}
 
-	
-	
 
 }
