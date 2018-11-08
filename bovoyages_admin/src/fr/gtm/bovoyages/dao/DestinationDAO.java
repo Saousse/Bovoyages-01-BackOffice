@@ -89,23 +89,19 @@ public class DestinationDAO {
 	//-----------------------------------------------------------------------------------------------------------------
 	//-------------------------------les modifs du 06/11/18 ------------------------------------------------------------
 	
-//	public void remove(Destination  destination) {
-//		Destination d1 = em.find(Destination.class, destination.getId());
-//		em.remove(d1);	
-//	}
-	
-	public void changeFlag(Destination destination) {
-		int nb_max = 100;
-		if(destination.getNb_max() >= nb_max ) {
-			int hidden = 0;
-			destination.getHidden();
-		}else {
-			int hidden =1;
-			destination.getHidden();
-			
-		}
-			
+	public void remove(Destination  destination) {
+		Destination d1 = em.find(Destination.class, destination.getId());
+		em.remove(d1);	
 	}
+	
+//	public void changeFlag(Destination destination) {
+//		int nb_max = 100;
+//		for(int i=1; i<=50;i++)
+//		{
+//			destination.getHidden();
+//		}
+//			
+//	}
 	
 	//----------------------------- Fin Modif ---------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------
