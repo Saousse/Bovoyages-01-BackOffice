@@ -8,14 +8,19 @@
 <style>
 table {
     font-family: arial, sans-serif;
+    text-align: center;
     border-collapse: collapse;
+    border-style:solid; 
+ 	border-color:lightblue;
     width: 100%;
 }
 
 td, th {
     border: 1px solid #dddddd;
-    text-align: left;
+    text-align: center;
     padding: 8px;
+    border-style:solid; 
+	border-color:turquoise;
 }
 
 tr:nth-child(even) {
@@ -61,19 +66,26 @@ tr:nth-child(even) {
 							<thead>
 								<tr class="w3-black">
 <!-- 									<th>Id.</th> -->
-									<th>Image</th>
-									<th>Région</th>
-									<th>Description</th>
-									<th>Supprimer</th>
-									<th>Modifier</th>
+									<th bgcolor="lightblue">Image</th>
+									<th bgcolor="lightblue">Région</th>
+									<th bgcolor="lightblue">Description</th>
+									<th bgcolor="lightblue">Supprimer</th>
+									<th bgcolor="lightblue">Modifier</th>
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-------------------------------------------------  Modif 08-11-18 ------------------------------------------------------------------------------>
+									<th bgcolor="lightblue">Nombre d'offre maximum</th> 
+									<th bgcolor="lightblue">visibilité</th>
+<!---------------------------------------------------  Fin modif ------------------------------------------------------------------------------ -->
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 								</tr>
 							</thead>
 							<c:forEach items="${destinations}" var="d" varStatus="status">
 								<tr>
-<%-- 									<td>${d.id}</td> --%>
+<!-- %-- 									<td>${d.id}</td> --%> -->
 									<td><img alt="${d.images[0]}" src="images/${d.images[0]}" id="" height="120" width="120"></td>
 									<td>${d.region}</td>
-									<td>${d.description}</td>
+									<td>${d.description}</td>		
 									<td>
 										<form action="DeleteDestinationServlet" method="get">
 											<input type="hidden" name="id" value="${d.id}">
@@ -86,8 +98,16 @@ tr:nth-child(even) {
 											<button>Modifier</button>
 										</form>
 									</td>
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-------------------------------------------------  Modif 08 and  09-11-18 ------------------------------------------------------------------------------>
+									
+									<td>${d.nb_max}</td> 
+									<td>${d.hidden}</td>
+									
+<!---------------------------------------------------  Fin modif ------------------------------------------------------------------------------ -->
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
 								</tr>
-							</c:forEach>
+							</c:forEach>				
 						</table>
 					</div>
 				</div>
