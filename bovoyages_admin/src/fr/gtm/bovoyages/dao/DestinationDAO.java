@@ -93,16 +93,6 @@ public class DestinationDAO {
 		Destination d1 = em.find(Destination.class, destination.getId());
 		em.remove(d1);	
 	}
-	
-//	public void changeFlag(Destination destination) {
-//		int nb_max = 100;
-//		for(int i=1; i<=50;i++)
-//		{
-//			destination.getHidden();
-//		}
-//			
-//	}
-	
 	//----------------------------- Fin Modif ---------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------
 	
